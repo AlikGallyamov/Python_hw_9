@@ -1,5 +1,5 @@
 from allure_commons.types import Severity
-
+from selenium import webdriver
 import allure
 import pytest
 from selene import browser, be, by
@@ -11,6 +11,11 @@ number_issue = 2
 
 @pytest.fixture
 def config_browser():
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    driver = webdriver.Chrome(options=options)
+
+    browser.config.driver = driver
     browser.config.window_height = 960
     browser.config.window_width = 1600
 
